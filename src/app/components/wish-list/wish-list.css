@@ -6,6 +6,20 @@
   background-color: #141414;
 }
 
+.wishlist-header {
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.wishlist-header h1 {
+  margin: 0;
+  color: white;
+  font-size: 1.8rem;
+}
+
 .movie-card {
   background-color: #222;
   border-radius: 12px;
@@ -35,6 +49,56 @@
   margin: 0;
 }
 
+.movie-detail button,
+.wishlist-header button {
+  padding: 10px 14px;
+  border: 0;
+  border-radius: 6px;
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.movie-detail button {
+  width: 100%;
+  margin-top: 14px;
+  background-color: #b3261e;
+  color: white;
+}
+
+.movie-detail button:hover {
+  background-color: #d93025;
+}
+
+.wishlist-header button {
+  background-color: #f8c705;
+  color: #141414;
+}
+
+.wishlist-header button:hover {
+  transform: translateY(-2px);
+  background-color: #ffda3d;
+}
+
+.movie-detail button:focus-visible,
+.wishlist-header button:focus-visible {
+  outline: 3px solid white;
+  outline-offset: 3px;
+}
+
 .empty-message {
   grid-column: 1 / -1;
+}
+
+@media (max-width: 480px) {
+  .container {
+    gap: 16px;
+    padding: 20px 16px;
+  }
+
+  .wishlist-header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
 }

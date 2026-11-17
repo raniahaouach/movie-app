@@ -63,4 +63,15 @@ export class MovieService {
       localStorage.setItem('wishList', JSON.stringify(updatedWishList));
     }
   }
+
+  removeFromWishList(movie: Movie) {
+    const updatedWishList = this.wishList().filter(
+      (savedMovie) => savedMovie.id !== movie.id,
+    );
+    this.wishList.set(updatedWishList);
+
+    if (typeof localStorage !== 'undefined') {
+      localStorage.setItem('wishList', JSON.stringify(updatedWishList));
+    }
+  }
 }

@@ -1,9 +1,22 @@
 <div class="container">
+  <div class="wishlist-header">
+    <h1>My wishlist</h1>
+    <button type="button" class="back-button" (click)="backToList()">Back to list</button>
+  </div>
+
   @for (movie of movieService.wishList(); track movie.id) {
     <div class="movie-card">
       <img [src]="`https://image.tmdb.org/t/p/original/${movie.poster_path}`" [alt]="movie.title" />
       <div class="movie-detail">
         <h2>{{ movie.title }}</h2>
+        <button
+          type="button"
+          class="remove-button"
+          [attr.aria-label]="'Remove ' + movie.title + ' from wishlist'"
+          (click)="removeFromWishList(movie)"
+        >
+          Remove from wishlist
+        </button>
       </div>
     </div>
   } @empty {

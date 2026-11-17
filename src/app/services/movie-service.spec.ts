@@ -50,6 +50,17 @@ describe('MovieService', () => {
     expect(service.wishList()).toEqual([movie]);
   });
 
+  it('removes a movie from the wishlist and saves the change', () => {
+    const anotherMovie = { ...movie, id: 2, title: 'Another movie' };
+    service.addToWishList(movie);
+    service.addToWishList(anotherMovie);
+
+    service.removeFromWishList(movie);
+
+    expect(service.wishList()).toEqual([anotherMovie]);
+    expect(JSON.parse(localStorage.getItem('wishList')!)).toEqual([anotherMovie]);
+  });
+
   it('restores saved movies when the service is created', () => {
     TestBed.resetTestingModule();
     localStorage.setItem('wishList', JSON.stringify([movie]));
