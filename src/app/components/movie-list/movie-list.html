@@ -1,0 +1,58 @@
+<div class="container">
+  <section class="filters" aria-label="Filtres et tri des films">
+    <label>
+      Genre
+      <select aria-label="Filtrer par genre" (change)="setGenre($event)">
+        <option value="">Tous les genres</option>
+        @for (genre of genres; track genre.id) {
+          <option [value]="genre.id">{{ genre.name }}</option>
+        }
+      </select>
+    </label>
+
+    <label>
+      Année
+      <select aria-label="Filtrer par année" (change)="setYear($event)">
+        <option value="">Toutes les années</option>
+        @for (year of years(); track year) {
+          <option [value]="year">{{ year }}</option>
+        }
+      </select>
+    </label>
+
+    <label>
+      Trier par
+      <select aria-label="Trier les films" (change)="setSort($event)">
+        <option value="default">Ordre par défaut</option>
+        <option value="year">Année (plus récente)</option>
+        <option value="rating">Note (meilleure)</option>
+        <option value="popularity">Popularité (plus élevée)</option>
+      </select>
+    </label>
+  </section>
+
+  @for (movie of filteredMovies(); track movie.id) {
+    <div class="movie-card" (click)="navigateTo(movie)">
+      <div class="poster-container">
+        <img [src]="`https://image.tmdb.org/t/p/original/${movie.poster_path}`" alt="" />
+        <span
+          class="rating-badge"
+          [class.rating-high]="ratingClass(movie.vote_average) === 'rating-high'"
+          [class.rating-medium]="ratingClass(movie.vote_average) === 'rating-medium'"
+          [class.rating-low]="ratingClass(movie.vote_average) === 'rating-low'"
+          [attr.aria-label]="'Note : ' + movie.vote_average + ' sur 10'"
+        >
+          {{ movie.vote_average }}
+        </span>
+      </div>
+      <div class="movie-detail">
+        <h2>
+          {{ movie.title }}
+        </h2>
+        <p>⭐ {{ movie.vote_average }} · {{ movie.release_date.slice(0, 4) }}</p>
+      </div>
+    </div>
+  } @empty {
+    <p class="empty-state">Aucun film ne correspond à ces filtres.</p>
+  }
+</div>

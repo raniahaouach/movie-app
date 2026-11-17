@@ -1,0 +1,12 @@
+<div class="container">
+  @for (movie of movieService.wishList(); track movie.id) {
+    <div class="movie-card">
+      <img [src]="`https://image.tmdb.org/t/p/original/${movie.poster_path}`" [alt]="movie.title" />
+      <div class="movie-detail">
+        <h2>{{ movie.title }}</h2>
+      </div>
+    </div>
+  } @empty {
+    <p class="empty-message">Your wishlist is empty.</p>
+  }
+</div>
